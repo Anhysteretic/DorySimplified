@@ -1,0 +1,37 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "FlapDown"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "1-shot"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.375
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "L4"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": null,
+  "choreoAuto": true
+}

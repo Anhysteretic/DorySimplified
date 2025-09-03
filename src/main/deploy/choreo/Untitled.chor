@@ -1,0 +1,93 @@
+{
+ "name":"Untitled",
+ "version":1,
+ "type":"Swerve",
+ "variables":{
+  "expressions":{},
+  "poses":{
+   "Source":{
+    "x":{
+     "exp":"1.3856428861618042 m",
+     "val":1.3856428861618042
+    },
+    "y":{
+     "exp":"7.220232009887695 m",
+     "val":7.220232009887695
+    },
+    "heading":{
+     "exp":"-0.936412728848505 rad",
+     "val":-0.936412728848505
+    }
+   }
+  }
+ },
+ "config":{
+  "frontLeft":{
+   "x":{
+    "exp":"0.273 m",
+    "val":0.273
+   },
+   "y":{
+    "exp":"0.237 m",
+    "val":0.237
+   }
+  },
+  "backLeft":{
+   "x":{
+    "exp":"-0.237 m",
+    "val":-0.237
+   },
+   "y":{
+    "exp":"0.237 m",
+    "val":0.237
+   }
+  },
+  "mass":{
+   "exp":"145 lbs",
+   "val":65.77089365
+  },
+  "inertia":{
+   "exp":"5.507603423 kg m ^ 2",
+   "val":5.507603423
+  },
+  "gearing":{
+   "exp":"6.12",
+   "val":6.12
+  },
+  "radius":{
+   "exp":"2 in",
+   "val":0.0508
+  },
+  "vmax":{
+   "exp":"4000 RPM",
+   "val":418.87902047863906
+  },
+  "tmax":{
+   "exp":"0.8 N * m",
+   "val":0.8
+  },
+  "cof":{
+   "exp":"0.6",
+   "val":0.6
+  },
+  "bumper":{
+   "front":{
+    "exp":"0.415 m",
+    "val":0.415
+   },
+   "side":{
+    "exp":"0.415 m",
+    "val":0.415
+   },
+   "back":{
+    "exp":"0.415 m",
+    "val":0.415
+   }
+  },
+  "differentialTrackWidth":{
+   "exp":"22 in",
+   "val":0.5588
+  }
+ },
+ "generationFeatures":[]
+}

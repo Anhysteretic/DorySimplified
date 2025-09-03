@@ -1,0 +1,128 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "FlapDown"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Z_c"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.375
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoL4"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Z_3c"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Intake"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Z_3k"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.25
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoL4"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Z_k3"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Intake"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Z_3l"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.25
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoL4"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Z_l3"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Intake"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Z_3a"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoL4"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": null,
+  "choreoAuto": true
+}
