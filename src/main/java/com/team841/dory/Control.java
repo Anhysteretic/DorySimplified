@@ -353,7 +353,7 @@ public class Control {
                 new InstantCommand(() -> this.shooter.setDutyCycle(-.08), shooter))
                 .onFalse(new InstantCommand(() -> this.shooter.setDutyCycle(0), shooter));
 
-        cojoystick.start().whileTrue(new InstantCommand(() -> this.shooter.setDutyCycle(.40), shooter)).onFalse(new InstantCommand(() -> this.shooter.setDutyCycle(0), shooter));        
+        cojoystick.leftStick().whileTrue(new InstantCommand(() -> this.shooter.setDutyCycle(.40), shooter)).onFalse(new InstantCommand(() -> this.shooter.setDutyCycle(0), shooter));        
         
         cojoystick.b().whileTrue(new InstantCommand(() -> this.shooter.setDutyCycle(-.08), shooter)).onFalse(new InstantCommand(() -> this.shooter.setDutyCycle(0), shooter));
 
