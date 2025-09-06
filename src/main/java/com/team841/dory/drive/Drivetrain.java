@@ -42,7 +42,7 @@ import java.util.function.Consumer;
 public class Drivetrain extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder> implements Subsystem{
 
     private final double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
-    private final double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond);
+    private final double MaxAngularRate = RotationsPerSecond.of(0.9).in(RadiansPerSecond);
 
     Telemetry telemetry = new Telemetry(TunerConstants.kSpeedAt12Volts.in(MetersPerSecond));
 
@@ -87,6 +87,13 @@ public class Drivetrain extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder> imp
 
     public Drivetrain(SwerveDrivetrainConstants drivetrainConstants, SwerveModuleConstants<?, ?, ?>... modules){
         super(TalonFX::new, TalonFX::new, CANcoder::new, drivetrainConstants, modules);
+
+        this.vxController.setTolerance(Units.inchesToMeters(0.5));
+        this.vyController.setTolerance(Units.inchesToMeters(0.5));
+
+        driveHeading.HeadingController.setPID(34.459, 0, 2.5039);
+        driveHeading.HeadingController.enableContinuousInput(-Math.PI, Math.PI);
+        driveHeading.HeadingController.setTolerance(0.1, 0.1);
     }
 
     @Override
@@ -210,7 +217,7 @@ public class Drivetrain extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder> imp
                     FiducialObservation.fromLimelight(megatag.rawFiducials),
                     MegatagPoseEstimate.fromLimelight(megatag),
                     MegatagPoseEstimate.fromLimelight(megatag2),
-                    "Vision/Charlie");
+                    "Vision/Gamma");
             }
         }
         if (charlieSeesTarget) {
@@ -231,8 +238,8 @@ public class Drivetrain extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder> imp
         GammaTable.getEntry("camerapose_robotspace_set").setDoubleArray(RC.Vision.GammaPose);
         CharlieTable.getEntry("camerapose_robotspace_set").setDoubleArray(RC.Vision.CharliePose);
 
-        Rotation2d gyroAngle = visionProcessor.getLatestFieldToRobot().getValue().getRotation();
-        double gyroAngularVelocity = Units.radiansToDegrees(visionProcessor.getLatestRobotRelativeChassisSpeed().omegaRadiansPerSecond);
+        Rotation2d gyroAngle = this.getState().Pose.getRotation();
+        double gyroAngularVelocity = this.getState().Speeds.omegaRadiansPerSecond;
         try {
             LimelightHelpers.SetIMUMode(RC.Vision.LimelightGammaName, 1);
             LimelightHelpers.SetIMUMode(RC.Vision.LimelightCharlieName, 1);

@@ -5,6 +5,7 @@
 package com.team841.dory;
 
 import edu.wpi.first.wpilibj.PowerDistribution;
+import edu.wpi.first.wpilibj.Threads;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -49,7 +50,6 @@ public class Robot extends TimedRobot {
     this.control = new Control(drivetrain, escalator, shooter, flapSystem);
     
     DogLog.setOptions(new DogLogOptions().withLogExtras(true).withCaptureDs(true).withCaptureNt(true));
-    DogLog.setPdh(new PowerDistribution());
 
     DogLog.log("ProjectName", BuildConstants.MAVEN_NAME);
     DogLog.log("BuildDate", BuildConstants.BUILD_DATE);
@@ -73,6 +73,8 @@ public class Robot extends TimedRobot {
 
     autoChooser = AutoBuilder.buildAutoChooser();
     SmartDashboard.putData("Auto Chooser", autoChooser);
+
+    Threads.setCurrentThreadPriority(true, 5);
   }
 
   @Override
