@@ -55,12 +55,12 @@ public class Shooter extends SubsystemBase{
      * all together.
      */
     public boolean escalatorClear() {
-        return (this.FrontCANrange.getDistance().getValue().magnitude() < 0.15 && this.BackCANrange.getDistance().getValue().magnitude() > 0.15)
-                || (this.FrontCANrange.getDistance().getValue().magnitude() > 0.15 && this.BackCANrange.getDistance().getValue().magnitude() > 0.15);
+        return (this.FrontCANrange.getDistance().getValue().magnitude() < 0.08 && this.BackCANrange.getDistance().getValue().magnitude() > 0.08)
+                || (this.FrontCANrange.getDistance().getValue().magnitude() > 0.08 && this.BackCANrange.getDistance().getValue().magnitude() > 0.08);
     }
 
     public boolean shooterHasCoral() {
-        return (this.FrontCANrange.getDistance().getValue().magnitude() < 0.15 && this.BackCANrange.getDistance().getValue().magnitude() > 0.15);
+        return (this.FrontCANrange.getDistance().getValue().magnitude() < 0.08 && this.BackCANrange.getDistance().getValue().magnitude() > 0.08);
     }
 
 

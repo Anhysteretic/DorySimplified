@@ -4,8 +4,6 @@ import static edu.wpi.first.units.Units.Meters;
 import static edu.wpi.first.units.Units.Percent;
 import static edu.wpi.first.units.Units.Second;
 
-import java.sql.Driver;
-
 import edu.wpi.first.units.measure.Distance;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.AddressableLED;
@@ -38,17 +36,19 @@ public class LED extends SubsystemBase{
     LEDPattern baseBlueEndgameFlash = LEDPattern.gradient(LEDPattern.GradientType.kDiscontinuous, Color.kBlack, blue);
     LEDPattern patternBlueEndgameFlash = baseBlueEndgameFlash.scrollAtRelativeSpeed(Percent.per(Second).of(100));
 
+    LEDPattern baseRedBreathe = LEDPattern.solid(red);
+    LEDPattern patternRedBreathe = baseRedBreathe.breathe(Second.of(0.25));
+
     LEDPattern patternYellowSolid = LEDPattern.solid(yellow);
     LEDPattern patternGreenSolid = LEDPattern.solid(green);
     LEDPattern patternBlueSolid = LEDPattern.solid(blue);
-
-    LEDPattern baseRedBreathe = LEDPattern.solid(red);
-    LEDPattern patternRedBreathe = baseRedBreathe.breathe(Second.of(0.25));
 
     public LED(Shooter shooter) {
         this.shooter = shooter;
         this.timer = new Timer();
         LED.setLength(Buffer.getLength());
+        patternRedBreathe.applyTo(BufferLeft);
+        patternRedBreathe.applyTo(BufferRight);
         LED.setData(Buffer);
         LED.start();
     }
@@ -59,7 +59,7 @@ public class LED extends SubsystemBase{
             this.timer.reset();
             this.timer.start();
         }
-        
+
         if (!this.timer.hasElapsed(3) && DriverStation.getMatchTime() < 20 && DriverStation.getMatchTime() > 0.01) {
             patternBlueEndgameFlash.applyTo(BufferLeft);
             patternBlueEndgameFlash.applyTo(BufferRight);
