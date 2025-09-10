@@ -19,6 +19,7 @@ import com.team841.dory.drive.Drivetrain;
 import com.team841.dory.superstructure.Escalator;
 import com.team841.dory.superstructure.FlapSystemAndHang;
 import com.team841.dory.superstructure.Shooter;
+import com.team841.dory.superstructure.LED;
 
 import dev.doglog.DogLog;
 import dev.doglog.DogLogOptions;
@@ -32,6 +33,7 @@ public class Robot extends TimedRobot {
   private final Escalator escalator;
   private final Shooter shooter;
   private final FlapSystemAndHang flapSystem;
+  private final LED led;
 
   private final Control control;
 
@@ -46,6 +48,7 @@ public class Robot extends TimedRobot {
     this.escalator = new Escalator();
     this.shooter = new Shooter();
     this.flapSystem = new FlapSystemAndHang();
+    this.led = new LED(this.shooter);
     
     this.control = new Control(drivetrain, escalator, shooter, flapSystem);
     
