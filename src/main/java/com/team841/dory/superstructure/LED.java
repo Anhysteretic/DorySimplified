@@ -28,18 +28,26 @@ public class LED extends SubsystemBase{
     Color red = new Color(255, 0, 0);
     Color green = new Color(0, 255, 0);
     Color blue = new Color(0, 0, 255);
+    Color purple = new Color(255, 0, 255);
     Distance ledSpacing = Meters.of(1 / 120.0);
 
-    LEDPattern baseYellowIdle = LEDPattern.gradient(LEDPattern.GradientType.kDiscontinuous, Color.kBlack, yellow);
-    LEDPattern patternYellowIdle = baseYellowIdle.scrollAtRelativeSpeed(Percent.per(Second).of(60));
+    LEDPattern baseYellowScroll = LEDPattern.gradient(LEDPattern.GradientType.kDiscontinuous, Color.kBlack, yellow);
+    LEDPattern patternYellowScroll = baseYellowScroll.scrollAtRelativeSpeed(Percent.per(Second).of(60));
 
-    LEDPattern baseBlueEndgameFlash = LEDPattern.gradient(LEDPattern.GradientType.kDiscontinuous, Color.kBlack, blue);
-    LEDPattern patternBlueEndgameFlash = baseBlueEndgameFlash.scrollAtRelativeSpeed(Percent.per(Second).of(100));
+    LEDPattern baseYellowRedScroll = LEDPattern.gradient(LEDPattern.GradientType.kDiscontinuous, red, yellow);
+    LEDPattern patternYellowRedScroll = baseYellowRedScroll.scrollAtRelativeSpeed(Percent.per(Second).of(60));
+
+    LEDPattern baseBlueScroll = LEDPattern.gradient(LEDPattern.GradientType.kDiscontinuous, Color.kBlack, blue);
+    LEDPattern patternBlueScroll = baseBlueScroll.scrollAtRelativeSpeed(Percent.per(Second).of(130));
+
+    LEDPattern basePurpleScroll = LEDPattern.gradient(LEDPattern.GradientType.kDiscontinuous, Color.kBlack, purple);
+    LEDPattern patternPurpleScroll = basePurpleScroll.scrollAtRelativeSpeed(Percent.per(Second).of(100));
 
     LEDPattern baseRedBreathe = LEDPattern.solid(red);
     LEDPattern patternRedBreathe = baseRedBreathe.breathe(Second.of(0.25));
 
     LEDPattern patternYellowSolid = LEDPattern.solid(yellow);
+    LEDPattern patternRedSolid = LEDPattern.solid(red);
     LEDPattern patternGreenSolid = LEDPattern.solid(green);
     LEDPattern patternBlueSolid = LEDPattern.solid(blue);
 
@@ -47,8 +55,8 @@ public class LED extends SubsystemBase{
         this.shooter = shooter;
         this.timer = new Timer();
         LED.setLength(Buffer.getLength());
-        patternRedBreathe.applyTo(BufferLeft);
-        patternRedBreathe.applyTo(BufferRight);
+        patternRedSolid.applyTo(BufferLeft);
+        patternRedSolid.applyTo(BufferRight);
         LED.setData(Buffer);
         LED.start();
     }
@@ -60,9 +68,27 @@ public class LED extends SubsystemBase{
             this.timer.start();
         }
 
-        if (!this.timer.hasElapsed(3) && DriverStation.getMatchTime() < 20 && DriverStation.getMatchTime() > 0.01) {
-            patternBlueEndgameFlash.applyTo(BufferLeft);
-            patternBlueEndgameFlash.applyTo(BufferRight);
+        /*
+        LED States & Colors:
+        Booting up - Solid Red
+        Booted up, driverstation disconnected - Yellow & Red Scrolling
+        Booted up, driverstation connected, disabled - Yellow Scrolling
+        Teleop enabled - Yellow Solid
+        Autonomous enabled - Purple Scrolling
+        Coral in robot, incorrect position - Red Flashing
+        Coral in robot, correct position - Green Solid
+        Endgame (Last 20 seconds) - Blue Scrolling (for 3 seconds, overrides other conditions), then Blue Solid (doesn't override)
+        */
+
+        if (!DriverStation.isDSAttached()) {
+            patternYellowRedScroll.applyTo(BufferLeft);
+            patternYellowRedScroll.applyTo(BufferRight);
+        } else if (DriverStation.isAutonomousEnabled()) {
+            patternPurpleScroll.applyTo(BufferLeft);
+            patternPurpleScroll.applyTo(BufferRight);
+        } else if (!this.timer.hasElapsed(3) && DriverStation.getMatchTime() < 20 && DriverStation.getMatchTime() > 0.01) {
+            patternBlueScroll.applyTo(BufferLeft);
+            patternBlueScroll.applyTo(BufferRight);
         } else if (!this.shooter.escalatorClear()) {
             patternRedBreathe.applyTo(BufferLeft);
             patternRedBreathe.applyTo(BufferRight);
@@ -73,14 +99,11 @@ public class LED extends SubsystemBase{
             patternBlueSolid.applyTo(BufferLeft);
             patternBlueSolid.applyTo(BufferRight);
         } else if (DriverStation.isDisabled()) {
-            patternYellowIdle.applyTo(BufferLeft);
-            patternYellowIdle.applyTo(BufferRight);
+            patternYellowScroll.applyTo(BufferLeft);
+            patternYellowScroll.applyTo(BufferRight);
         } else if (DriverStation.isTeleopEnabled()) {
             patternYellowSolid.applyTo(BufferLeft);
             patternYellowSolid.applyTo(BufferRight);
-        } else if (DriverStation.isAutonomousEnabled()) {
-            patternYellowIdle.applyTo(BufferLeft);
-            patternYellowIdle.applyTo(BufferRight);
         }
         LED.setData(Buffer);
     }
