@@ -213,7 +213,7 @@ public class Drivetrain extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder> imp
             var megatag2 = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(RC.Vision.LimelightGammaName);
             if (megatag != null && megatag2 != null){
                 visionProcessor.updateVision(
-                    charlieSeesTarget,
+                    gammaSeesTarget,
                     FiducialObservation.fromLimelight(megatag.rawFiducials),
                     MegatagPoseEstimate.fromLimelight(megatag),
                     MegatagPoseEstimate.fromLimelight(megatag2),

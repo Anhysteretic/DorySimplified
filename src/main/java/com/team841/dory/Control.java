@@ -349,12 +349,12 @@ public class Control {
 
         cojoystick.x().and(() -> !this.shooter.shooterHasCoral()).whileTrue(intake);
 
-        cojoystick.b().whileTrue(
-                new InstantCommand(() -> this.shooter.setDutyCycle(-.08), shooter))
-                .onFalse(new InstantCommand(() -> this.shooter.setDutyCycle(0), shooter));
-
-        cojoystick.leftStick().whileTrue(new InstantCommand(() -> this.shooter.setDutyCycle(.40), shooter)).onFalse(new InstantCommand(() -> this.shooter.setDutyCycle(0), shooter));        
+        cojoystick.leftStick().whileTrue(new InstantCommand(() -> this.shooter.setDutyCycle(.40), shooter)).onFalse(new InstantCommand(() -> this.shooter.setDutyCycle(0), shooter));
         
+        cojoystick.rightStick().whileTrue(new InstantCommand(() -> this.flapSystem.setIntakeDutyCycle(-0.5), flapSystem)).onFalse(new InstantCommand(() -> this.flapSystem.setIntakeDutyCycle(0), flapSystem));
+        
+        cojoystick.rightStick().whileTrue(new InstantCommand(() -> this.shooter.setDutyCycle(-.5), shooter)).onFalse(new InstantCommand(() -> this.shooter.setDutyCycle(0), shooter));
+
         cojoystick.b().whileTrue(new InstantCommand(() -> this.shooter.setDutyCycle(-.08), shooter)).onFalse(new InstantCommand(() -> this.shooter.setDutyCycle(0), shooter));
 
         cojoystick.back().onTrue(new InstantCommand(escalator::zero, escalator));
