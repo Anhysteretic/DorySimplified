@@ -328,56 +328,56 @@ public class Control {
         joystick.touchpad().onTrue(new InstantCommand(drivetrain::seedFieldCentric));
 
         /* Zero Automation */
-        cojoystick.y().and(cojoystick.rightTrigger()).whileTrue(noSnapAutoScoreL4);
+        joystick.L1().and(joystick.triangle()).whileTrue(noSnapAutoScoreL4);
 
-        cojoystick.y().and(cojoystick.rightBumper()).whileTrue(noSnapAutoScoreL3);
+        joystick.L1().and(joystick.square()).whileTrue(noSnapAutoScoreL3);
 
-        cojoystick.y().and(cojoystick.leftTrigger()).whileTrue(noSnapAutoScoreL2);
+        joystick.L1().and(joystick.circle()).whileTrue(noSnapAutoScoreL2);
 
-        cojoystick.y().onFalse(escalatorGoHome);
+        joystick.L1().onFalse(escalatorGoHome);
 
         /* Automated */
-        cojoystick.leftBumper().and(cojoystick.rightTrigger()).whileTrue(snapScoreL4);
+        joystick.R1().and(joystick.triangle()).whileTrue(snapScoreL4);
 
-        cojoystick.leftBumper().and(cojoystick.rightBumper()).whileTrue(snapScoreL3);
+        joystick.R1().and(joystick.square()).whileTrue(snapScoreL3);
 
-        cojoystick.leftBumper().and(cojoystick.leftTrigger()).whileTrue(snapScoreL2);
+        joystick.R1().and(joystick.circle()).whileTrue(snapScoreL2);
 
-        cojoystick.leftBumper().onFalse(escalatorGoHome);
+        joystick.R1().onFalse(escalatorGoHome);
 
         /* ###################################### */
 
-        cojoystick.x().and(() -> !this.shooter.shooterHasCoral()).whileTrue(intake);
+        joystick.L2().and(() -> !this.shooter.shooterHasCoral()).whileTrue(intake);
 
-        cojoystick.leftStick().whileTrue(new InstantCommand(() -> this.shooter.setDutyCycle(.40), shooter)).onFalse(new InstantCommand(() -> this.shooter.setDutyCycle(0), shooter));
+        joystick.R2().whileTrue(new InstantCommand(() -> this.shooter.setDutyCycle(.40), shooter)).onFalse(new InstantCommand(() -> this.shooter.setDutyCycle(0), shooter));
         
-        cojoystick.rightStick().whileTrue(new InstantCommand(() -> this.flapSystem.setIntakeDutyCycle(-0.5), flapSystem)).onFalse(new InstantCommand(() -> this.flapSystem.setIntakeDutyCycle(0), flapSystem));
+        joystick.cross().whileTrue(new InstantCommand(() -> this.flapSystem.setIntakeDutyCycle(-0.5), flapSystem)).onFalse(new InstantCommand(() -> this.flapSystem.setIntakeDutyCycle(0), flapSystem));
         
-        cojoystick.rightStick().whileTrue(new InstantCommand(() -> this.shooter.setDutyCycle(-.5), shooter)).onFalse(new InstantCommand(() -> this.shooter.setDutyCycle(0), shooter));
+        joystick.cross().whileTrue(new InstantCommand(() -> this.shooter.setDutyCycle(-.5), shooter)).onFalse(new InstantCommand(() -> this.shooter.setDutyCycle(0), shooter));
 
-        cojoystick.b().whileTrue(new InstantCommand(() -> this.shooter.setDutyCycle(-.08), shooter)).onFalse(new InstantCommand(() -> this.shooter.setDutyCycle(0), shooter));
+        joystick.R3().whileTrue(new InstantCommand(() -> this.shooter.setDutyCycle(-.08), shooter)).onFalse(new InstantCommand(() -> this.shooter.setDutyCycle(0), shooter));
 
-        cojoystick.back().onTrue(new InstantCommand(escalator::zero, escalator));
+        joystick.PS().onTrue(new InstantCommand(escalator::zero, escalator));
 
-        cojoystick.povDown().whileTrue(this.escalator.goDown());
+        joystick.povDown().whileTrue(this.escalator.goDown());
 
-        cojoystick.povUp().whileTrue(this.escalator.goUp());
+        joystick.povUp().whileTrue(this.escalator.goUp());
 
-        cojoystick.povLeft().whileTrue(
+        joystick.povLeft().whileTrue(
                 new InstantCommand(() -> this.flapSystem.setFlapperDutyCycle(0.25), flapSystem))
                 .onFalse(new InstantCommand(() -> this.flapSystem.stopFlapper(), flapSystem));
 
-        cojoystick.povRight().whileTrue(
+        joystick.povRight().whileTrue(
                 new InstantCommand(() -> this.flapSystem.setFlapperDutyCycle(-0.25), flapSystem))
                 .onFalse(new InstantCommand(() -> this.flapSystem.stopFlapper(), flapSystem));
 
         // cojoystick.povRight().onTrue(new RunCommand(() -> this.flapSystem.setFlapperDutyCycle(-0.5), flapSystem).withTimeout(0.5).finallyDo(flapSystem::stopFlapper));
 
-        joystick.L1().whileTrue(
+        joystick.L3().whileTrue(
                 new InstantCommand(() -> this.flapSystem.setHangDutyCycle(1), flapSystem))
                 .onFalse(new InstantCommand(() -> this.flapSystem.stopHang(), flapSystem));
 
-        joystick.R2().toggleOnTrue(new InstantCommand(() -> drivetrain.setPose(Pose2d.kZero)));
+        // joystick.R2().toggleOnTrue(new InstantCommand(() -> drivetrain.setPose(Pose2d.kZero)));
         cojoystick.a().whileTrue(new InstantCommand(() -> this.flapSystem.setHangDutyCycle(1), flapSystem))
                 .onFalse(new InstantCommand(() -> this.flapSystem.stopHang(), flapSystem));
     }
