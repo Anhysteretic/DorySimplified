@@ -101,6 +101,9 @@ public class FlapSystemAndHang extends SubsystemBase{
             this.setHangState("Deploying");
             this.timer.reset();
         }
+        if (this.hangState.equals("Deployed")) {
+            this.setHangState("Hanging");
+        }
     }
     
     private void setHangState(String state) {
