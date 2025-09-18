@@ -108,7 +108,17 @@ public class SC {
         public static int intakeMotor = 14;
         public static int intakeCanRangeId = 3;
         public static int hangMotor = 12;
-        public static int hangMotor2 = 16;
+        public static int grabMotor = 16;
+        public static int throughbore = 37;
+
+        public static double hangDeployedAngle = 0.3;
+        public static double hangHungAngle = -0.3;
+        public static double grabMotorCurrentTrigger = 20;
+        public static double grabMotorCurrentTriggerDelay = 0.5;
+
+        public static double hangDeployingDutyCycle = 0.2;
+        public static double hangHangingDutyCycle = 0.5;
+        public static double grabDutyCycle = 0.5;
 
         public static TalonFXConfiguration configs =
                 new TalonFXConfiguration()
