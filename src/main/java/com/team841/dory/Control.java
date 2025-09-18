@@ -370,8 +370,6 @@ public class Control {
                 new InstantCommand(() -> this.flapSystem.setFlapperDutyCycle(-0.25), flapSystem))
                 .onFalse(new InstantCommand(() -> this.flapSystem.stopFlapper(), flapSystem));
 
-        joystick.rightStick().whileTrue(
-                new InstantCommand(() -> this.flapSystem.setHangDutyCycle(1), flapSystem))
-                .onFalse(new InstantCommand(() -> this.flapSystem.stopHang(), flapSystem));
+        joystick.rightStick().onTrue(new InstantCommand(() -> this.flapSystem.startClimb(), flapSystem));
     }
 }

@@ -99,7 +99,12 @@ public class FlapSystemAndHang extends SubsystemBase{
     public void startClimb() {
         if (this.hangState.equals("Stowed")) {
             this.setHangState("Deploying");
+            this.timer.reset();
         }
+    }
+    
+    private void setHangState(String state) {
+        this.hangState = state;
     }
 
     public boolean flapHasCoral() {
@@ -152,9 +157,5 @@ public class FlapSystemAndHang extends SubsystemBase{
 
     public void stopHang() {
         this.hangMotor.stopMotor();
-    }
-
-    private void setHangState(String state) {
-        this.hangState = state;
     }
 }
