@@ -65,7 +65,7 @@ public class FlapSystemAndHang extends SubsystemBase{
         if (this.hangState.equals("Deploying")) {
             this.setHangDutyCycle(SC.flapSystem.hangDeployingDutyCycle);
             this.setGrabDutyCycle(SC.flapSystem.grabDutyCycle);
-            if (this.getHangAngle() > SC.flapSystem.hangDeployedAngle) {
+            if (this.getHangAngle() < SC.flapSystem.hangDeployedAngle) {
                 this.setHangState("Deployed");
             }
         } else if (this.hangState.equals("Deployed")) {
@@ -78,7 +78,7 @@ public class FlapSystemAndHang extends SubsystemBase{
             }
         } else if (this.hangState.equals("Hanging")) {
             this.setHangDutyCycle(SC.flapSystem.hangHangingDutyCycle);
-            if (this.getHangAngle() < SC.flapSystem.hangHungAngle) {
+            if (this.getHangAngle() > SC.flapSystem.hangHungAngle) {
                 this.setHangState("Hung");
             }
         } else {
